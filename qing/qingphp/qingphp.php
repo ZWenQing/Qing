@@ -1,16 +1,15 @@
 <?PHP
-namespace qing\hel;
+namespace q\controller;
 
-class qing{
+class controller{
   public $host;
   
   
   public function index(){
-    echo '在'.__NAMESPACE__."里";
     
   }
   
   
 }
-$qing = new qing();
+
 ?>
