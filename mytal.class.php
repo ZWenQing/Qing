@@ -7,9 +7,9 @@ class MyTpl{
 	public $right_delimiter = "}>";
 	private $tpl_vars = array();
 	/*
-		½«phpÖĞµÄ·ÖÅäÖµ»á±£´æµ½³ÉÔ±ÊôĞÔ$tpl_varsÖĞÓÃÓÚ½«°åÖĞÏà¶ÔÓ¦µÄ±äÁ¿½øĞĞÌæ»»
-		@param string $tpl_vars ĞèÒªÒ»¸ö×Ö·û´®²ÎÊı×÷Îª¹ØÁªÏÂ±ê£¬ÒªºÍÄ£°åÖĞµÄ±äÁ¿Ãû¶ÔÓ¦
-		@param string $value ĞèÒªÒ»¸ö±êÁ¿ÀàĞÍµÄÖµ£¬ÓÃÀ´·ÖÅä¸øÄ£°åÖĞµÄ±äÁ¿µÄÖµ
+		å°†phpä¸­çš„åˆ†é…å€¼ä¼šä¿å­˜åˆ°æˆå‘˜å±æ€§$tpl_varsä¸­ç”¨äºå°†æ¿ä¸­ç›¸å¯¹åº”çš„å˜é‡è¿›è¡Œæ›¿æ¢
+		@param string $tpl_vars éœ€è¦ä¸€ä¸ªå­—ç¬¦ä¸²å‚æ•°ä½œä¸ºå…³è”ä¸‹æ ‡ï¼Œè¦å’Œæ¨¡æ¿ä¸­çš„å˜é‡åå¯¹åº”
+		@param string $value éœ€è¦ä¸€ä¸ªæ ‡é‡ç±»å‹çš„å€¼ï¼Œç”¨æ¥åˆ†é…ç»™æ¨¡æ¿ä¸­çš„å˜é‡çš„å€¼
 	*/
 
 	function assign($tpl_var , $value= null){
@@ -18,92 +18,92 @@ class MyTpl{
 		}
 	}
 	/*
-		¼ÓÔØÖ¸¶¨Ä¿Â¼µÄÄ£°åÎÄ¼ş£¬²¢½«Ìæ»»ºóµÄÄÚÈİÉú³É×éºÏÎÄ¼ş´æ·Åµ½ÁíÒ»¸öÖ¸¶¨Ä¿Â¼ÏÂ
-		@param string $fileName  Ìá¹©Ä£°åÎÄ¼şÃû
+		åŠ è½½æŒ‡å®šç›®å½•çš„æ¨¡æ¿æ–‡ä»¶ï¼Œå¹¶å°†æ›¿æ¢åçš„å†…å®¹ç”Ÿæˆç»„åˆæ–‡ä»¶å­˜æ”¾åˆ°å¦ä¸€ä¸ªæŒ‡å®šç›®å½•ä¸‹
+		@param string $fileName  æä¾›æ¨¡æ¿æ–‡ä»¶å
 	*/
 	function display($fileName){
 		//var_dump(file_exists("home/".$this->template_dir."/index.html"));
 		//die("jieshu");
-		/*µ½Ö¸¶¨µÄÄ¿Â¼Ñ°ÕÒÄ£°åÎÄ¼ş*/
+		/*åˆ°æŒ‡å®šçš„ç›®å½•å¯»æ‰¾æ¨¡æ¿æ–‡ä»¶*/
 		$tplFile = $this->template_dir."/".$fileName;
 		if(!file_exists($tplFile)){
-			die("Ä£°åÎÄ¼ş{$tplFile}²»´æÔÚ");
+			die("æ¨¡æ¿æ–‡ä»¶{$tplFile}ä¸å­˜åœ¨");
 		}
-		/*	»ñÈ¡×éºÏµÄÄ£°åÎÄ¼ş£¬¸ÃÎÄ¼şµÄÄÚÈİ¶¼ÊÇ±»Ìæ»»¹ıµÄ*/
+		/*	è·å–ç»„åˆçš„æ¨¡æ¿æ–‡ä»¶ï¼Œè¯¥æ–‡ä»¶çš„å†…å®¹éƒ½æ˜¯è¢«æ›¿æ¢è¿‡çš„*/
 		$comFileName = $this->compile_dir."/com_".$fileName.".php";
-		/*ÅĞ¶ÏÌæ»»ºóµÄÎÄ¼şÊÇ·ñ´æÔÚºñÊµ´æÔÚµ«ÓĞ¸Ä¶¯*/
+		/*åˆ¤æ–­æ›¿æ¢åçš„æ–‡ä»¶æ˜¯å¦å­˜åœ¨åšå®å­˜åœ¨ä½†æœ‰æ”¹åŠ¨*/
 		if( !file_exists($comFileName) || filemtime($comFileName) < filemtime($tplFile)){
-			/*µ÷ÓÃÄÚ²¿Ìæ»»Ä£°å·½·¨*/
+			/*è°ƒç”¨å†…éƒ¨æ›¿æ¢æ¨¡æ¿æ–¹æ³•*/
 			$repContent = $this->tpl_replace(file_get_contents($tplFile));
-			/*±£´æÓÉÏµÍ³×éºÏºóµÄ½Å±¾ÎÄ¼ş*/
+			/*ä¿å­˜ç”±ç³»ç»Ÿç»„åˆåçš„è„šæœ¬æ–‡ä»¶*/
 			file_put_contents($comFileName,$repContent);
 		}
-			/*°üº¬´¦ÀíºóµÄÄ£°åÎÄ¼şÊä³ö¸ø¿Í»§*/
+			/*åŒ…å«å¤„ç†åçš„æ¨¡æ¿æ–‡ä»¶è¾“å‡ºç»™å®¢æˆ·*/
 			include($comFileName);
 		
 	}
 	/*
-		ÄÚ²¿Ê¹ÓÃµÄË½ÓĞ·½·¨£¬Ê¹ÓÃÕıÔò±í´ïÊ½½«Ä£°åÎÄ¼ş'<{}>'ÖĞµÄÓï¾äÌæ»»³É¶ÔÓ¦µÄÖµ»òÕßphp´úÂë
-		@param string $content Ìá¹©´ÓÄ£°åÎÄ¼ş¶ÁÈëµÄÈ«²¿ÄÚÈİ×Ö·û´®
-		@return $repContent    ·µ»ØÌæ»»ºóµÄ×Ö·û´®
+		å†…éƒ¨ä½¿ç”¨çš„ç§æœ‰æ–¹æ³•ï¼Œä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼å°†æ¨¡æ¿æ–‡ä»¶'<{}>'ä¸­çš„è¯­å¥æ›¿æ¢æˆå¯¹åº”çš„å€¼æˆ–è€…phpä»£ç 
+		@param string $content æä¾›ä»æ¨¡æ¿æ–‡ä»¶è¯»å…¥çš„å…¨éƒ¨å†…å®¹å­—ç¬¦ä¸²
+		@return $repContent    è¿”å›æ›¿æ¢åçš„å­—ç¬¦ä¸²
 	*/
 	private function tpl_replace($content){
-		/*½«×óÓÒ¶¨½ç·ûºÅÖĞ£¬ÓĞÓ°ÏìÕıÔòµÄÌØÊâ·ûºÅ×ªÒå ÀıÈç£¬<{}>×ªÒå³É\<\{\}\>*/
+		/*å°†å·¦å³å®šç•Œç¬¦å·ä¸­ï¼Œæœ‰å½±å“æ­£åˆ™çš„ç‰¹æ®Šç¬¦å·è½¬ä¹‰ ä¾‹å¦‚ï¼Œ<{}>è½¬ä¹‰æˆ\<\{\}\>*/
 		$left = preg_quote($this->left_delimiter,"/");
 		$right = preg_quote($this->right_delimiter,"/");
-		/*Æ¥ÅäÄ£°åÖĞ¸÷ÖÖ±íÊ¾·ûµÄÕıÔò±í´ïÊ½µÄÄ£Ê½Êı×é*/
+		/*åŒ¹é…æ¨¡æ¿ä¸­å„ç§è¡¨ç¤ºç¬¦çš„æ­£åˆ™è¡¨è¾¾å¼çš„æ¨¡å¼æ•°ç»„*/
 		$pattern = array(
-			/*Æ¥ÅäÄ£°åÖĞ±äÁ¿,ÀıÈç£¬¡°<{ $valr }>¡±*/
+			/*åŒ¹é…æ¨¡æ¿ä¸­å˜é‡,ä¾‹å¦‚ï¼Œâ€œ<{ $valr }>â€*/
 			'/'.$left.'\s*\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*'.$right.'/i',
-			/*Æ¥ÅäÄ£°åÖĞif±êÊ¾·û£¬ÀıÈç"<{if $col=="sex"}><{/if}>"*/
-			'/'.$left.'\s*else\s*if\s*(.+?)\s*'.$right.'(.+?)'.$left.'\s*\/if\s*'.$right.'/ies',
-			/*Æ¥Åäelse±êÊ¾·û,ÀıÈç"<{ else }>"*/
+			/*åŒ¹é…æ¨¡æ¿ä¸­ifæ ‡ç¤ºç¬¦ï¼Œä¾‹å¦‚"<{if $col=="sex"}><{/if}>"*/
+			'/'.$left.'\s*if\s*(.+?)\s*'.$right.'(.+?)'.$left.'\s*\/if\s*'.$right.'/ies',
+			/*åŒ¹é…elseæ ‡ç¤ºç¬¦,ä¾‹å¦‚"<{ else }>"*/
 			'/'.$left.'\s*else\s*'.$right.'/is',
-			/*ÓÃÀ´Æ¥ÅäÄ£°åÖĞµÄloop±êÊ¾·û£¬ÓÃÀ´±éÀúÊı×éÖĞµÄÖµ£¬ÀıÈç"<{ loop $arrs $value }><{ /loop }>"*/
+			/*ç”¨æ¥åŒ¹é…æ¨¡æ¿ä¸­çš„loopæ ‡ç¤ºç¬¦ï¼Œç”¨æ¥éå†æ•°ç»„ä¸­çš„å€¼ï¼Œä¾‹å¦‚"<{ loop $arrs $value }><{ /loop }>"*/
 			'/'.$left.'\s*loop\s+\$(\s+)\s+\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s'.$right.'(.+?)'.$left.'\s*\/loop\s*'.$right.'/is',
-			/*ÓÃÀ´±éÀúÊı×éÖĞµÄ¼üºÍÖµ£¬ÀıÈç"<{ loop $arrs $key => $vaule }><{ \loop }>"*/
-			'/'.$left.'\s*loop\s+\$(\s+)\s+\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*=>\s*\$(\s+)\s*'.$right.'(.+?)'.$left.'\s*\/loop \s*'.$right.'/is',
-			/*Æ¥Åäinclude±êÊ¾·û£¬ÀıÈç£¬"<{ include "header.html" }>"*/
+			/*ç”¨æ¥éå†æ•°ç»„ä¸­çš„é”®å’Œå€¼ï¼Œä¾‹å¦‚"<{ loop $arrs $key => $vaule }><{ \loop }>"*/
+			'/'.$left.'\s*loop\s+\$(\S+)\s+\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*=>\s*\$(\s+)\s*'.$right.'(.+?)'.$left.'\s*\/loop \s*'.$right.'/is',
+			/*åŒ¹é…includeæ ‡ç¤ºç¬¦ï¼Œä¾‹å¦‚ï¼Œ"<{ include "header.html" }>"*/
 			'/'.$left.'\s*include\s+[\"\']?(.+?)[\"\']?\s*'.$right.'/ie'
 		);
 		$replacement = array(
-			/* Ìæ»»Ä£°åÖĞµÄ±äÁ¿<?php echo $this->tpl_vars["var"] ?> */
+			/* æ›¿æ¢æ¨¡æ¿ä¸­çš„å˜é‡<?php echo $this->tpl_vars["var"] ?> */
 			'<?php echo $this->tpl_vars["${1}"]; ?>',
-			/*Ìæ»»Ä£°åÖĞµÄif×Ö·û´®<?php if($col=="sex"){?> <?php} ?>*/
+			/*æ›¿æ¢æ¨¡æ¿ä¸­çš„ifå­—ç¬¦ä¸²<?php if($col=="sex"){?> <?php} ?>*/
 			'$this->stripvtags(\'<?php if( ${1}) { ?>\',\'(${2}) <?php } ?>\')',
-			/*Ìæ»»elseifµÄ×Ö·û´®<?php } elseif($col == "sex"){ ?> */
+			/*æ›¿æ¢elseifçš„å­—ç¬¦ä¸²<?php } elseif($col == "sex"){ ?> */
 			'$this->stripvtags(\'<?php } elseif (${1}) { ?>\',"") ',
-			/*Ìæ»»elseµÄ×Ö·û´®<?php } else { ?>*/
+			/*æ›¿æ¢elseçš„å­—ç¬¦ä¸²<?php } else { ?>*/
 			'<?php }else{ ?>',
-			/*Ò»ÏÂÁ½ÌõÓÃÀ´Ìæ»»Ä£°åÖĞµÄloop±êÊ¶·ûÎªforeach¸ñÊ½*/
+			/*ä¸€ä¸‹ä¸¤æ¡ç”¨æ¥æ›¿æ¢æ¨¡æ¿ä¸­çš„loopæ ‡è¯†ç¬¦ä¸ºforeachæ ¼å¼*/
 			'<?php foreach($this->tpl_vars["${1}"])as $this->tpl_vars["${2}"]){ ?>${3}<?php } ?>',
 			'<?php foreach($this->tpl_vars["${1}"]) as $this->tpl_vars["${2}"]=>$this->tpl_vars["${3}"]) { ?>${4}<?php } ?> ',
-			/*Ìæ»»includeµÄ×Ö·û´®*/
+			/*æ›¿æ¢includeçš„å­—ç¬¦ä¸²*/
 			'file_get_contents($this->template_dir."/s{1}")'
 		);
-		/*Ê¹ÓÃÕıÔòÌæ»»º¯Êı*/
+		/*ä½¿ç”¨æ­£åˆ™æ›¿æ¢å‡½æ•°*/
 		$repContent = preg_replace($pattern,$replacement,$content);
-		/*Èç¹û»¹ÓĞÒªÌæ»»µÄ±êÊ¶·ûµİ¹éµ÷ÓÃÔÙ´ÎÌæ»»*/
+		/*å¦‚æœè¿˜æœ‰è¦æ›¿æ¢çš„æ ‡è¯†ç¬¦é€’å½’è°ƒç”¨å†æ¬¡æ›¿æ¢*/
 		if(preg_match('/'.$left.'([^('.$right.')]{1,})'.$right.'/',$repContent)){
 			$repContent = $this->tpl_replace($repContent);
 		}
-		/*·µ»ØÌæ»»ºóµÄ×Ö·û´®*/
+		/*è¿”å›æ›¿æ¢åçš„å­—ç¬¦ä¸²*/
 		return $repContent;
 	}
 	/*
-		ÄÚ²¿Ê¹ÓÃË½ÓĞ·½·¨ £¬ÓÃÀ´½«Ìõ¼şÓï¾äÖĞÊ¹ÓÃµÄ±äÁ¿Ìæ»»Îª¶ÔÓ¦µÄÖµ
-		@param string $expr Ìá¹©Ä£°åÖĞÌõ¼şÓï¾äµÄ¿ªÊ¼±ê¼Ç
-		@param string $statement Ìá¹©Ä£°åÖĞÌõ¼şÓï¾ä½áÊø±ê¼Ç
-		@return string      ½«´¦ÀíºóµÄÌõ¼şÓï¾äÏàÁ¬ºó·µ»Ø
+		å†…éƒ¨ä½¿ç”¨ç§æœ‰æ–¹æ³• ï¼Œç”¨æ¥å°†æ¡ä»¶è¯­å¥ä¸­ä½¿ç”¨çš„å˜é‡æ›¿æ¢ä¸ºå¯¹åº”çš„å€¼
+		@param string $expr æä¾›æ¨¡æ¿ä¸­æ¡ä»¶è¯­å¥çš„å¼€å§‹æ ‡è®°
+		@param string $statement æä¾›æ¨¡æ¿ä¸­æ¡ä»¶è¯­å¥ç»“æŸæ ‡è®°
+		@return string      å°†å¤„ç†åçš„æ¡ä»¶è¯­å¥ç›¸è¿åè¿”å›
 	
 	*/
 	private function stripvtags($expr , $statement=''){
-		/*Æ¥Åä±äÁ¿µÄÕıÔò*/
+		/*åŒ¹é…å˜é‡çš„æ­£åˆ™*/
 		$var_pattern = '/\s*\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*/is';
 		$expr = preg_replace($var_pattern , '$this->tpl_vars["${1}"]',$expr);
-		/*½«¿ªÊ¼±ê¼ÇÖĞµÄÒıºÅ×ªÒåÌæ»»*/
+		/*å°†å¼€å§‹æ ‡è®°ä¸­çš„å¼•å·è½¬ä¹‰æ›¿æ¢*/
 		$expr = str_replace("\\\"","\"",$expr);
-		/*Ìæ»»Óï¾äºÍ½áÊø±ê¼ÇÖĞµÄÒıºÅ*/
+		/*æ›¿æ¢è¯­å¥å’Œç»“æŸæ ‡è®°ä¸­çš„å¼•å·*/
 		$statement = str_replace("\\\"","\"",$statement);
 		return $expr.$statement;
 		
