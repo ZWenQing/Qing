@@ -4,10 +4,10 @@ require './qingphp/mkfile.php';
 include './qingphp/qingphp.php';
 include './qingphp/model.class.php';
 use q\model;
-class models extends model{
+class userModel extends model{
   
 }
-$model = new models();
+$model = new userModel();
 $pel = explode('/',$_GET['pel']);
 include_once( './../app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
 $controller = '\home\index\\'.$pel[1].'Controller';
