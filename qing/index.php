@@ -4,10 +4,10 @@ require './qingphp/mkfile.php';
 include './qingphp/qingphp.php';
 include './qingphp/model.class.php';
 use q\model;
-class userModel extends model{
+class teModel extends model{
   
 }
-$model = new userModel();
+$model = new teModel();
 $model->add(array("name"=>"abc"));
 $pel = explode('/',$_GET['pel']);
 include_once( './../app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );

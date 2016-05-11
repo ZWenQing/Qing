@@ -22,11 +22,24 @@ class model{
   }
   
   public function add($data){
-    $sql = 'INSERT INTO '.$this->sql["table"]." VALUES ? ";
-    $this->pdo->prepare($sql);
-    $this->execute($data);
-    $res = $this->pdo->fetchAll();
-    var_dump();
+      try{
+        //$sql = 'INSERT INTO '.$this->sql["table"]." ? VALUES ? ";
+        $sql = "select * from te where ? = ?";
+        $requre = $this->pdo->prepare($sql);
+        //$requre->execute(array("1","zwq"));
+        $requre->execute();
+        $res = $requre->fetchAll();
+        $requre->errorInfo();
+        var_dump($res);
+        //var_dump($requre);
+        foreach( $requre as $v ){
+            print_r("<br>");
+            var_dump($v);
+        }
+      
+      }catch(PDOException $e){
+          echo "error:".$e;
+      }
   }
 }
 
