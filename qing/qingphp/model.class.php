@@ -21,25 +21,34 @@ class model{
     return $this;
   }
   
-  public function add($data){
-      try{
-        //$sql = 'INSERT INTO '.$this->sql["table"]." ? VALUES ? ";
-        $sql = "select * from te where ? = ?";
-        $requre = $this->pdo->prepare($sql);
-        //$requre->execute(array("1","zwq"));
-        $requre->execute();
-        $res = $requre->fetchAll();
-        $requre->errorInfo();
-        var_dump($res);
-        //var_dump($requre);
-        foreach( $requre as $v ){
-            print_r("<br>");
-            var_dump($v);
+  public function data($data){
+    $this->sql["data"] = $data;
+    return $this;
+  }
+  
+  public function add(){
+      $keys = array_keys($this->sql["data"]);
+      $values = array_values($this->sql["data"]);
+      $keyname = null;
+      $valuename = null;
+      for( $i = 0 ; $i < count($keys); $i++ ){
+        if( $i === 0 ){
+          $keyname .= $keys[$i];
+          $valuename .= "'".$values[$i]."'"; 
+        }else{
+          $keyname .= ",".$keys[$i];
+          $valuename .= ",'".$values[$i]."'"; 
         }
-      
-      }catch(PDOException $e){
-          echo "error:".$e;
       }
+      $sql = "INSERT INTO ".$this->sql["table"]."(".$keyname.") VALUES (".$valuename.")";
+      //print_r($sql);die;
+      //$requre = $this->pdo->prepare($sql);
+      //$res = $requre->execute();
+      $res = $this->pdo->query($sql);
+      var_dump($res);die();
+  }
+  public function clos(){
+    $this->pdo = null;
   }
 }
 

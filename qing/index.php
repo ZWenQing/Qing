@@ -8,7 +8,7 @@ class teModel extends model{
   
 }
 $model = new teModel();
-$model->add(array("name"=>"abc"));
+$model->data(array("name" => "zhouwenqing"))->add();
 $pel = explode('/',$_GET['pel']);
 include_once( './../app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
 $controller = '\home\index\\'.$pel[1].'Controller';
