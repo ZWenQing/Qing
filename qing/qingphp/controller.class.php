@@ -9,8 +9,9 @@ class controller{
   }
   
   public function display($filename){
-    $classname = str_replace('Controller','',__class__);die($classname);
-    $filenames = './../app/HOME/view/'.$classname.'/'.$filename.'.html';
+    $namespaces = str_replace('Controller','',get_class($this));
+    $class = explode("\\",$class);
+    $filenames = './../app/HOME/view/'.$class[2].'/'.$filename.'.html';
     if( file_exists($filenames) ){
       $this->template(file_get_contents($filenames));
     }else{
