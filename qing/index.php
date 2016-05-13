@@ -1,18 +1,17 @@
 <?PHP
-define('HOME','home');
-require './qingphp/mkfile.php';
-include './qingphp/qingphp.php';
-include './qingphp/model.class.php';
-use q\model;
-class teModel extends model{
-  
-}
-$model = new teModel();
-$model->where(array("id"=>"1"))->deletes();
-$pel = explode('/',$_GET['pel']);
-include_once( './../app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
-$controller = '\\home\\index\\'.$pel[1].'Controller';
-$cont = new $controller;
-$cont->indexAction();
 
+
+$dirs = _QING."/qingphp";
+$s = dir($dirs);
+while( $filename = $s->read() ){
+  if( $filename == "." || $filename == ".." || is_dir($dirs."/".$filename)){
+    continue;
+  }
+  include_once $dirs.'/'.$filename;
+}
+$pel = explode('/',$_GET['pel']);
+include_once( './app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
+$controller = '\\home\\index\\'.$pel[1].'Controller';
+$controllers = new $controller;
+$controllers->indexAction();
 ?>

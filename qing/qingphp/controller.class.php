@@ -3,23 +3,19 @@ namespace q;
 
 class controller{
   public $arr = [];
-  public function M($modelname){
-    
-  }
+  
   public function message( $key , $value ){
     $this->arr[$key] = $value;
   }
   
   public function display($filename){
-    $filenames = './../app/HOME/view/'.$filename.'.html';
+    $classname = str_replace('Controller','',__class__);die($classname);
+    $filenames = './../app/HOME/view/'.$classname.'/'.$filename.'.html';
     if( file_exists($filenames) ){
       $this->template(file_get_contents($filenames));
     }else{
       echo "目标文件不存在";
     }
-    
-    
-    
   }
   public function template($content){
     $LeftBound = "<{";
