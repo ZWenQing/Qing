@@ -8,10 +8,10 @@ class teModel extends model{
   
 }
 $model = new teModel();
-$model->data(array("name" => "zhouwenqing"))->add();
+$model->where(array("id"=>"1"))->deletes();
 $pel = explode('/',$_GET['pel']);
 include_once( './../app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
-$controller = '\home\index\\'.$pel[1].'Controller';
+$controller = '\\home\\index\\'.$pel[1].'Controller';
 $cont = new $controller;
 $cont->indexAction();
 
