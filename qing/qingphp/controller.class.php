@@ -10,8 +10,8 @@ class controller{
   
   public function display($filename){
     $namespaces = str_replace('Controller','',get_class($this));
-    $class = explode("\\",$class);
-    $filenames = './../app/HOME/view/'.$class[2].'/'.$filename.'.html';
+    $class = explode("\\",$namespaces);
+    $filenames = Q_VIEW.'/'.$class[2].'/'.$filename.'.html';
     if( file_exists($filenames) ){
       $this->template(file_get_contents($filenames));
     }else{
@@ -39,8 +39,8 @@ class controller{
     );
     extract($this->arr,EXTR_OVERWRITE);
     $result = preg_replace( $pattern , $replacement , $content );
-    file_put_contents( './../app/cache/index.html' , $result );
-    include_once('./../app/cache/index.html');
+    file_put_contents( Q_APP.'/cache/index.html' , $result );
+    include_once( Q_APP.'/cache/index.html' );
   }
 }
 
