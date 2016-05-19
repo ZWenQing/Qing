@@ -24,16 +24,16 @@ class controller{
     $Left = preg_quote($LeftBound , '/' );
     $Right = preg_quote($RightBound , '/' );
     $pattern  = array(
-      '/'.$Left.'\s+\$(\w*)\s+'.$Right.'/i',
-      '/'.$Left.'\s+\$(\w*)(?:\.\$(\w+))?\s+'.$Right.'/i',
-      '/'.$Left.'\s+\$(\w*)(?:\:\$(\w+))?\s+'.$Right.'/i',
+      '/'.$Left.'\s+(\$?\w*?)\s+'.$Right.'/i',
+      '/'.$Left.'\s+(\$?\w*?)(?:\.\$(\w+))\s+'.$Right.'/i',
+      '/'.$Left.'\s+(\$?\w*?)(?:\:\$(\w+))\s+'.$Right.'/i',
       '/'.$Left.'\s+volist\s+\$([a-zA-Z][a-zA-Z0-9]*)\s+\$([a-zA-Z][a-zA-z0-9]*)\s+\$([a-zA-Z][a-zA-Z0-9]*)\s+'.$Right.'\s*(.*?)\s*'.$Left.'\/volist'.$Right.'/i',
       '/'.$Left.'\s+for\s+start=\"(\d+)\"\s+end=\"(\d+)\"'.$Right.'\s*(.*?)\s*'.$Left.'\/for'.$Right.'/i'
     );
     $replacement = array(
-      '<?php echo (\$${1}) ; ?>',
-      '<?php echo (\$${1}["${2}"]) ; ?>',
-      '<?php echo (\$${1}->${2}) ; ?>',
+      '<?php echo (${1}) ; ?>',
+      '<?php echo (${1}["${2}"]) ; ?>',
+      '<?php echo (${1}->${2}) ; ?>',
       '<?php foreach( $this->arr["${1}"] as \$${2} => \$${3} ){ ?> ${4} <?php }?>',
       '<?php for(\$i = ${1} , \$i < ${2} , \$i++){?> ${3} <?php} ?>'
     );
