@@ -13,7 +13,7 @@ if(!file_exists(Q_PUBLIC.'/app')){
     file_put_contents(Q_MODEL.'/index.html','');
     mkdir(Q_CONTROLLER);
     file_put_contents(Q_CONTROLLER.'/index.html','');
-    $contents = file_get_contents(Q_QING.'/qingphp/config/indexController.class.php');
+    $contents = file_get_contents(Q_QING.'/config/indexController.class.php');
     file_put_contents(Q_CONTROLLER."/indexController.class.php",$contents);
     mkdir(Q_VIEW);
     file_put_contents(Q_VIEW.'/index.html','');

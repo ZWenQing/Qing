@@ -2,13 +2,16 @@
 
 
 $dirs = Q_QING."/qingphp";
-$s = dir($dirs);
-while( $filename = $s->read() ){
-  if( $filename == "." || $filename == ".." || is_dir($dirs."/".$filename)){
-    continue;
-  }
-  include_once $dirs.'/'.$filename;
+function load( $dirs ){
+    $s = dir($dirs);
+    while( $filename = $s->read() ){
+      if( $filename == "." || $filename == ".." || is_dir($dirs."/".$filename)){
+        continue;
+      }
+      strrchr($filename , '.') === '.php' and include_once("{$dirs}/{$filename}");
+    }
 }
+load($dirs);
 //url
 if( empty($_GET['pel']) ){
     $pel[0] = "home";
