@@ -5,13 +5,18 @@ $dirs = Q_QING."/qingphp";
 function load( $dirs ){
     $s = dir($dirs);
     while( $filename = $s->read() ){
-      if( $filename == "." || $filename == ".." || is_dir($dirs."/".$filename)){
+      if( $filename == "." || $filename == ".." ){
         continue;
+      }
+      if( is_dir("{$dirs}/{$filename}") ){
+        load("{$dirs}/{$filename}");
       }
       strrchr($filename , '.') === '.php' and include_once("{$dirs}/{$filename}");
     }
+    $s->close();
 }
 load($dirs);
+load(Q_APP);
 //url
 if( empty($_GET['pel']) ){
     $pel[0] = "home";
@@ -20,8 +25,7 @@ if( empty($_GET['pel']) ){
 }else{
     $pel = explode('/',$_GET['pel']);
 }
-include_once( './app/'.$pel[0].'/controller/'.$pel[1].'Controller.class.php' );
-$controller = '\\home\\index\\'.$pel[1].'Controller';
+$controller = '\\'.ucfirst(strtolower($pel[0])).'\\'.ucfirst(strtolower($pel[1])).'\\'.ucfirst(strtolower($pel[1])).'Controller';
 $controllers = new $controller;
 $fun = $pel[2]."Action";
 $controllers->$fun();
