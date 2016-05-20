@@ -15,8 +15,8 @@ if(!file_exists(Q_PUBLIC.'/app')){
     file_put_contents(Q_MODEL.'/index.html','');
     mkdir(Q_CONTROLLER);
     file_put_contents(Q_CONTROLLER.'/index.html','');
-    $contents = file_get_contents(Q_QING.'/config/indexController.class.php');
-    file_put_contents(Q_CONTROLLER."/indexController.class.php",$contents);
+    $contents = file_get_contents(Q_QING.'/config/IndexController.class.php');
+    file_put_contents(Q_CONTROLLER."/IndexController.class.php",$contents);
     mkdir(Q_VIEW);
     file_put_contents(Q_VIEW.'/index.html','');
 }*/
@@ -49,7 +49,10 @@ function copydir( $copyfile , $file ){
     return '文件路径有错';
   }
 }
-copydir( Q_QING.'/app' , Q_PUBLIC.'/app' );
+if( false ){
+  copydir( Q_QING.'/app' , Q_PUBLIC.'/app' );
+}
+
 
 
 ?>

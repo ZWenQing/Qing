@@ -1,18 +1,19 @@
 <?php
 namespace q;
 
-class model{
+class Model{
   public $table_name = "";
   public $pdo = null;
   public $sql = array();
   public function __construct(){
+    var_dump(get_class($this));
     $modelname = str_replace("Model","",get_class($this));
     $this->sql["table"] = $modelname;
     $this->db();
     
   }
   public function db(){
-    $config = include ("./qingphp/config/config.php");
+    $config = include ("./qing/config/config.php");
     if( $config["db_type"] === "mysql" ){
       $connect = "mysql:host=".$config["host"].";dbname=".$config["db_name"];
       $this->pdo = new \PDO($connect,$config["db_user"],$config["db_pwd"]) or die("连接失败");
@@ -46,6 +47,7 @@ class model{
     $res = $requre->execute();
     //$res = $this->pdo->query($sql);
     $this->clos();
+    return $res;
   }
   
   public function where($data){
@@ -75,6 +77,7 @@ class model{
     }
     $res = $pdo->fetchAll();
     $this->clos();
+    return $res;
   }
   
   public function save($data = null){
@@ -96,6 +99,7 @@ class model{
     $pdo = $this->pdo->prepare($sql);
     $pdo->execute() or var_dump($pdo->errorInfo());
     $this->clos();
+    return $pdo;
   }
   
   public function deletes(){
@@ -112,11 +116,13 @@ class model{
     $res or var_dump($pdo->errorInfo());
     $pdo->fetchAll();
     $this->clos();
+    return $pdo;
   }
   
   public function clos(){
     $this->pdo = null;
   }
 }
+
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 namespace q;
 
-class controller{
+class Controller{
   public $arr = [];
   
   public function message( $key , $value ){

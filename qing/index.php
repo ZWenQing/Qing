@@ -27,6 +27,6 @@ if( empty($_GET['pel']) ){
 }
 $controller = '\\'.ucfirst(strtolower($pel[0])).'\\'.ucfirst(strtolower($pel[1])).'\\'.ucfirst(strtolower($pel[1])).'Controller';
 $controllers = new $controller;
-$fun = $pel[2]."Action";
+$fun = ucfirst(strtolower($pel[2]))."Action";
 $controllers->$fun();
 ?>
