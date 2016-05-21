@@ -6,8 +6,7 @@ class Model{
   public $pdo = null;
   public $sql = array();
   public function __construct(){
-    var_dump(get_class($this));
-    $modelname = str_replace("Model","",get_class($this));
+    $modelname = str_replace(["Model","Home","\\"],"",get_class($this));
     $this->sql["table"] = $modelname;
     $this->db();
     

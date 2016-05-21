@@ -4,10 +4,9 @@
  * */
 //D方法
 function D( $name ){
-    $s = __FUNCTION__;
-    $l = explode('\\',$s);
-    var_dump($s);die;
-    $modelname = $l[0]."\\Model\\".$name;
+    $s = debug_backtrace();
+    $l = explode('\\',$s[1]['class']);
+    $modelname = $l[0]."\\Model\\".ucfirst(strtolower($name)).'Model';
     return new $modelname;
 }
 ?>

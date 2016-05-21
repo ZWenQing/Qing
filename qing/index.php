@@ -25,7 +25,7 @@ if( empty($_GET['pel']) ){
 }else{
     $pel = explode('/',$_GET['pel']);
 }
-$controller = '\\'.ucfirst(strtolower($pel[0])).'\\'.ucfirst(strtolower($pel[1])).'\\'.ucfirst(strtolower($pel[1])).'Controller';
+$controller = '\\'.ucfirst(strtolower($pel[0])).'\\Controller\\'.ucfirst(strtolower($pel[1])).'Controller';
 $controllers = new $controller;
 $fun = ucfirst(strtolower($pel[2]))."Action";
 $controllers->$fun();
