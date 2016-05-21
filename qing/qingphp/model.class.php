@@ -43,10 +43,8 @@ class Model{
       }
     }
     $sql = "INSERT INTO ".$this->sql["table"]."(".$keyname.") VALUES (".$valuename.")";
-    //print_r($sql);die;
     $requre = $this->pdo->prepare($sql);
     $res = $requre->execute();
-    //$res = $this->pdo->query($sql);
     $this->clos();
     return $res;
   }

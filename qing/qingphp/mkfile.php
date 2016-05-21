@@ -49,7 +49,7 @@ function copydir( $copyfile , $file ){
     return '文件路径有错';
   }
 }
-if( false ){
+if( !file_exists(Q_PUBLIC.'/app') ){
   copydir( Q_QING.'/apps' , Q_PUBLIC.'/app' );
 }
 
