@@ -32,7 +32,7 @@ class Controller{
     );
     $replacement = array(
       '<?php echo (${1}) ; ?>',
-      '<?php echo (${1}["${2}"]) ; ?>',
+      '<?php echo (${1}[\'${2}\']) ; ?>',
       '<?php echo (${1}->${2}) ; ?>',
       '<?php foreach( $this->arr["${1}"] as \$${2} => \$${3} ){ ?> ${4} <?php }?>',
       '<?php for(\$i = ${1} , \$i < ${2} , \$i++){?> ${3} <?php} ?>'
