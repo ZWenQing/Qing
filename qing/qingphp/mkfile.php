@@ -50,7 +50,7 @@ function copydir( $copyfile , $file ){
   }
 }
 if( false ){
-  copydir( Q_QING.'/apps' , Q_PUBLIC.'/apps' );
+  copydir( Q_QING.'/apps' , Q_PUBLIC.'/app' );
 }
 
 

@@ -2,14 +2,16 @@
 namespace q;
 
 class Model{
-  public $table_name = "";
   public $pdo = null;
   public $sql = array();
-  public function __construct(){
-    $modelname = str_replace(["Model","Home","\\"],"",get_class($this));
-    $this->sql["table"] = $modelname;
+  public function __construct( $name = null ){
+    if(!($name == null)){
+      $this->sql["table"] = $name;
+    }else{
+      $modelname = str_replace(["Model","Home","\\"],"",get_class($this));
+      $this->sql["table"] = $modelname;
+    }
     $this->db();
-    
   }
   public function db(){
     $config = include ("./qing/config/config.php");

@@ -9,4 +9,8 @@ function D( $name ){
     $modelname = $l[0]."\\Model\\".ucfirst(strtolower($name)).'Model';
     return new $modelname;
 }
+function M( $name ){
+    $s = 'q\\Model';
+    return new $s( $name );
+}
 ?>
